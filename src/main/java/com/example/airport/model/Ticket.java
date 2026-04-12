@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name="tickets")
-public class Ticket {
+public class Ticket{
     @Id
     @Column(name = "ticket_no", length = 13)
     private String ticketNo;

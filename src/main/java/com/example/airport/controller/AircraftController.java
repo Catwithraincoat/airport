@@ -1,7 +1,6 @@
 package com.example.airport.controller;
 
 import com.example.airport.model.Aircraft;
-import com.example.airport.model.Airport;
 import com.example.airport.service.AircraftService;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +31,7 @@ public class AircraftController {
     }
 
     @PutMapping("/{code}")
-    public Aircraft putAircraft(@PathVariable String code, @RequestBody Aircraft aircraft){
+    public Aircraft updateAircraft(@PathVariable String code, @RequestBody Aircraft aircraft){
         return aircraftService.updateAircraft(code, aircraft);
     }
     //Для удлание физическое и логическое - передача флага

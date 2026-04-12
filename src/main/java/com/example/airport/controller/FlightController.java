@@ -1,6 +1,6 @@
 package com.example.airport.controller;
 
-import com.example.airport.model.Airport;
+
 import com.example.airport.model.Flight;
 import com.example.airport.service.FlightService;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +32,7 @@ public class FlightController {
     }
 
     @PutMapping("/{id}")
-    public Flight putFlight(@PathVariable Integer id, @RequestBody Flight flight){
+    public Flight updateFlight(@PathVariable Integer id, @RequestBody Flight flight){
         return flightService.updateFlight(id, flight);
     }
 

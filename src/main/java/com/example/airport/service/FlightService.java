@@ -1,20 +1,17 @@
 package com.example.airport.service;
 
-import com.example.airport.model.Airport;
+
 import com.example.airport.model.Flight;
 import com.example.airport.repository.FlightRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class FlightService {
     private final FlightRepository flightRepository;
-
-    public FlightService(FlightRepository flightRepository) {
-        this.flightRepository = flightRepository;
-    }
-
 
     public List<Flight> getAll() {
         return flightRepository.findAll();

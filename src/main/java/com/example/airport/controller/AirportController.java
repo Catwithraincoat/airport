@@ -30,7 +30,7 @@ public class AirportController {
     }
 
     @PutMapping("/{code}")
-    public Airport putAirport(@PathVariable String code, @RequestBody Airport airport){
+    public Airport updateAirport(@PathVariable String code, @RequestBody Airport airport){
         return airportService.updateAirport(code, airport);
     }
 
