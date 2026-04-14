@@ -1,38 +1,37 @@
 package com.example.airport.controller;
 
-import com.example.airport.model.Aircraft;
+import com.example.airport.entity.AircraftEntity;
 import com.example.airport.service.AircraftService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/aircrafts")
+@RequestMapping("/v1/aircrafts")
+@RequiredArgsConstructor
 public class AircraftController {
-    private AircraftService aircraftService;
+    private final AircraftService aircraftService;
     // Контроллер для поиска с фильтрами
-    public AircraftController(AircraftService aircraftService){
-        this.aircraftService = aircraftService;
-    }
 
     @GetMapping("/{code}")
-    public Aircraft getById(@PathVariable String code){
+    public AircraftEntity getById(@PathVariable String code){
         return aircraftService.getAircraftById(code);
     }
 
     @GetMapping
-    public List<Aircraft> getAllAircrafts() {
+    public List<AircraftEntity> getAllAircrafts() {
         return aircraftService.getAll();
     }
 
     @PostMapping
-    public Aircraft createAircraft(@RequestBody Aircraft aircraft){
-        return aircraftService.saveAircraft(aircraft);
+    public AircraftEntity createAircraft(@RequestBody AircraftEntity aircraftEntity){
+        return aircraftService.saveAircraft(aircraftEntity);
     }
 
     @PutMapping("/{code}")
-    public Aircraft updateAircraft(@PathVariable String code, @RequestBody Aircraft aircraft){
-        return aircraftService.updateAircraft(code, aircraft);
+    public AircraftEntity updateAircraft(@PathVariable String code, @RequestBody AircraftEntity aircraftEntity){
+        return aircraftService.updateAircraft(code, aircraftEntity);
     }
     //Для удлание физическое и логическое - передача флага
     @DeleteMapping("/{code}")

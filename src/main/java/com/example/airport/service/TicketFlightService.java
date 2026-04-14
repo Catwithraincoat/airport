@@ -1,41 +1,40 @@
 package com.example.airport.service;
 
-import com.example.airport.model.Ticket;
-import com.example.airport.model.TicketFlight;
+import com.example.airport.entity.TicketFlightEntity;
 import com.example.airport.repository.TicketFlightRepository;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class TicketFlightService {
-    private TicketFlightRepository ticketFlightRepository;
+    private final TicketFlightRepository ticketFlightRepository;
 
-    public List<TicketFlight> getAll(){
+    public List<TicketFlightEntity> getAll(){
         return ticketFlightRepository.findAll();
     }
 
-    public TicketFlight getbyId(TicketFlight.TicketFlightId  Id){
+    public TicketFlightEntity getbyId(TicketFlightEntity.TicketFlightId  Id){
         if (!ticketFlightRepository.existsById(Id)) {
             return ticketFlightRepository.getById(Id);}
 
         throw new RuntimeException("Связь билет-полет  не найдена");
     }
 
-    public TicketFlight create(TicketFlight ticketFlight){
-        return ticketFlightRepository.save(ticketFlight);
+    public TicketFlightEntity create(TicketFlightEntity ticketFlightEntity){
+        return ticketFlightRepository.save(ticketFlightEntity);
     }
 
-    public TicketFlight updateTicket(TicketFlight.TicketFlightId  Id, TicketFlight ticketFlight){
+    public TicketFlightEntity updateTicket(TicketFlightEntity.TicketFlightId  Id, TicketFlightEntity ticketFlightEntity){
         if (!ticketFlightRepository.existsById(Id)) {
-            return ticketFlightRepository.save(ticketFlight);
+            return ticketFlightRepository.save(ticketFlightEntity);
         }
         throw new RuntimeException("Связь билет-полет не найден");
 
     }
-    public void delete(TicketFlight.TicketFlightId Id){
+    public void delete(TicketFlightEntity.TicketFlightId Id){
         ticketFlightRepository.deleteById(Id);
     }
 

@@ -1,7 +1,7 @@
 package com.example.airport.controller;
 
 
-import com.example.airport.model.Seat;
+import com.example.airport.entity.SeatEntity;
 import com.example.airport.service.SeatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -9,33 +9,33 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/seats")
+@RequestMapping("/v1/seats")
 @RequiredArgsConstructor
 public class SeatController {
     private final SeatService seatService;
 
     @GetMapping
-    public List<Seat> getAllSeats() {
+    public List<SeatEntity> getAllSeats() {
         return seatService.getAll();
     }
 
-    @GetMapping("/{id}")
-    public Seat getByIdSeat(@PathVariable Seat.SeatId Id){
+    @GetMapping("/{Id}")
+    public SeatEntity getByIdSeat(@PathVariable SeatEntity.SeatId Id){
         return seatService.getById(Id);
     }
 
     @PostMapping
-    public Seat createSeat(@RequestBody Seat seat){
-        return seatService.create(seat);
+    public SeatEntity createSeat(@RequestBody SeatEntity seatEntity){
+        return seatService.create(seatEntity);
     }
 
     @PutMapping("/{id}")
-    public Seat updateSeat(Seat.SeatId id, @RequestBody Seat seat){
-        return seatService.updateSeat(id, seat);
+    public SeatEntity updateSeat(SeatEntity.SeatId id, @RequestBody SeatEntity seatEntity){
+        return seatService.updateSeat(id, seatEntity);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteSeat(@PathVariable Seat.SeatId id){
+    public void deleteSeat(@PathVariable SeatEntity.SeatId id){
         seatService.delete(id);
     }
 

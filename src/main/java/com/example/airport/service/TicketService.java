@@ -1,7 +1,7 @@
 package com.example.airport.service;
 
 
-import com.example.airport.model.Ticket;
+import com.example.airport.entity.TicketEntity;
 import com.example.airport.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,26 +11,26 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class TicketService {
-    private TicketRepository ticketRepository;
+    private final TicketRepository ticketRepository;
 
-    public List<Ticket> getAll(){
+    public List<TicketEntity> getAll(){
         return ticketRepository.findAll();
     }
 
-    public Ticket getbyId(String Id){
+    public TicketEntity getbyId(String Id){
         if (!ticketRepository.existsById(Id)) {
             return ticketRepository.getById(Id);}
 
         throw new RuntimeException("Бронь  не найдена");
     }
 
-    public Ticket create(Ticket ticket){
-        return ticketRepository.save(ticket);
+    public TicketEntity create(TicketEntity ticketEntity){
+        return ticketRepository.save(ticketEntity);
     }
 
-    public Ticket updateTicket(String Id, Ticket ticket){
+    public TicketEntity updateTicket(String Id, TicketEntity ticketEntity){
         if (!ticketRepository.existsById(Id)) {
-            return ticketRepository.save(ticket);
+            return ticketRepository.save(ticketEntity);
         }
         throw new RuntimeException("Билет не найден");
 

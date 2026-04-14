@@ -1,4 +1,4 @@
-package com.example.airport.model;
+package com.example.airport.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "flights")
 @Data
-public class Flight {
+public class FlightEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "flight_id")
@@ -23,11 +23,11 @@ public class Flight {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "departure_airport", nullable = false)
-    private Airport departureAirport;
+    private AirportEntity departureAirport;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "arrival_airport", nullable = false)
-    private Airport arrivalAirport;
+    private AirportEntity arrivalAirport;
 
     // Возможно стоит перейти на  enum
     @Column(name="status", nullable = false)
@@ -35,7 +35,7 @@ public class Flight {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="aircraft_code", nullable = false)
-    private Aircraft aircraft;
+    private AircraftEntity aircraftEntity;
 
     @Column(name = "actual_departure")
     private OffsetDateTime actualDeparture;
@@ -44,10 +44,10 @@ public class Flight {
     private OffsetDateTime actualArrival;
 
     @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
-    private List<TicketFlight> ticketFlights;
+    private List<TicketFlightEntity> ticketFlightEntities;
 
     @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
-    private List<BoardingPass> boardingPasses;
+    private List<BoardingPassEntity> boardingPassEntities;
 
 
 }

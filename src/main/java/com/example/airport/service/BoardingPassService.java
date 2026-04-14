@@ -1,7 +1,7 @@
 package com.example.airport.service;
 
 
-import com.example.airport.model.BoardingPass;
+import com.example.airport.entity.BoardingPassEntity;
 import com.example.airport.repository.BoardingPassRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.*;
@@ -11,30 +11,30 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class BoardingPassService {
-    private BoardingPassRepository boardingPassRepository;
+    private final BoardingPassRepository boardingPassRepository;
 
 
-    public List<BoardingPass> getaAll(){
+    public List<BoardingPassEntity> getaAll(){
         return boardingPassRepository.findAll();
     }
 
-    public BoardingPass getById(BoardingPass.BoardingPassId Id){
+    public BoardingPassEntity getById(BoardingPassEntity.BoardingPassId Id){
         return boardingPassRepository.findById(Id)
                 .orElseThrow(() -> new RuntimeException("Место не найдено"));
     }
 
-    public BoardingPass create(BoardingPass boardingPass){
-        return boardingPassRepository.save(boardingPass);
+    public BoardingPassEntity create(BoardingPassEntity boardingPassEntity){
+        return boardingPassRepository.save(boardingPassEntity);
     }
 
-    public BoardingPass update(BoardingPass.BoardingPassId Id, BoardingPass boardingPass){
+    public BoardingPassEntity update(BoardingPassEntity.BoardingPassId Id, BoardingPassEntity boardingPassEntity){
         if (!boardingPassRepository.existsById(Id)) {
-            return boardingPassRepository.save(boardingPass);
+            return boardingPassRepository.save(boardingPassEntity);
         }
         throw new RuntimeException("Посадочный  не найден");
     }
 
-    public void delete(BoardingPass.BoardingPassId id){
+    public void delete(BoardingPassEntity.BoardingPassId id){
         boardingPassRepository.deleteById(id);
     }
 }

@@ -1,6 +1,6 @@
 package com.example.airport.service;
 
-import com.example.airport.model.Seat;
+import com.example.airport.entity.SeatEntity;
 import com.example.airport.repository.SeatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,26 +12,26 @@ import java.util.List;
 public class SeatService {
     private final SeatRepository seatRepository;
     //todo mapping
-    public List<Seat> getAll() {
+    public List<SeatEntity> getAll() {
         return seatRepository.findAll();
     }
 
-    public Seat getById(Seat.SeatId id) {
+    public SeatEntity getById(SeatEntity.SeatId id) {
         return seatRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Место не найдено"));
     }
 
-    public void delete(Seat.SeatId id){
+    public void delete(SeatEntity.SeatId id){
         seatRepository.deleteById(id);
     }
 
-    public Seat create(Seat seat ){
-        return seatRepository.save(seat);
+    public SeatEntity create(SeatEntity seatEntity){
+        return seatRepository.save(seatEntity);
     }
 
-    public Seat updateSeat(Seat.SeatId Id, Seat seat){
+    public SeatEntity updateSeat(SeatEntity.SeatId Id, SeatEntity seatEntity){
         if (!seatRepository.existsById(Id)) {
-            return seatRepository.save(seat);
+            return seatRepository.save(seatEntity);
         }
         throw new RuntimeException("Место не найден");
     }

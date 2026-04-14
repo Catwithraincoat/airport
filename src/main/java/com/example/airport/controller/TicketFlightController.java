@@ -1,7 +1,7 @@
 package com.example.airport.controller;
 
 
-import com.example.airport.model.TicketFlight;
+import com.example.airport.entity.TicketFlightEntity;
 import com.example.airport.service.TicketFlightService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -10,33 +10,33 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/ticketflights")
+@RequestMapping("/v1/ticketflights")
 public class TicketFlightController {
-    private TicketFlightService ticketFlightService;
+    private final TicketFlightService ticketFlightService;
 
 
     @GetMapping
-    public List<TicketFlight> getAllTF(){
+    public List<TicketFlightEntity> getAllTF(){
         return ticketFlightService.getAll();
     }
 
     @GetMapping("/{id}")
-    public TicketFlight getByIdTF(@PathVariable TicketFlight.TicketFlightId id){
+    public TicketFlightEntity getByIdTF(@PathVariable TicketFlightEntity.TicketFlightId id){
         return ticketFlightService.getbyId(id);
     }
 
     @PostMapping
-    public TicketFlight createTF(@RequestBody TicketFlight ticketFlight){
-        return ticketFlightService.create(ticketFlight);
+    public TicketFlightEntity createTF(@RequestBody TicketFlightEntity ticketFlightEntity){
+        return ticketFlightService.create(ticketFlightEntity);
     }
 
     @PutMapping("/{id}")
-    public TicketFlight updateTF(@PathVariable TicketFlight.TicketFlightId id,@RequestBody TicketFlight ticketFlight ){
-        return ticketFlightService.updateTicket(id, ticketFlight);
+    public TicketFlightEntity updateTF(@PathVariable TicketFlightEntity.TicketFlightId id, @RequestBody TicketFlightEntity ticketFlightEntity){
+        return ticketFlightService.updateTicket(id, ticketFlightEntity);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTF(@PathVariable TicketFlight.TicketFlightId id){
+    public void deleteTF(@PathVariable TicketFlightEntity.TicketFlightId id){
         ticketFlightService.delete(id);
     }
 

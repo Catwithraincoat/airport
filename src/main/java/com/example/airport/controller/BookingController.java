@@ -1,6 +1,6 @@
 package com.example.airport.controller;
 
-import com.example.airport.model.Booking;
+import com.example.airport.entity.BookingEntity;
 import com.example.airport.service.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -9,28 +9,28 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/bookings")
+@RequestMapping("/v1/bookings")
 public class BookingController {
-    private BookingService bookingService;
+    private final BookingService bookingService;
 
     @GetMapping
-    public List<Booking> getAllBookings(){
+    public List<BookingEntity> getAllBookings(){
         return bookingService.getAll();
     }
 
-    @GetMapping("/{id}")
-    public Booking getByid(@PathVariable  String Id){
+    @GetMapping("/{Id}")
+    public BookingEntity getByid(@PathVariable  String Id){
         return bookingService.getbyId(Id);
     }
 
     @PostMapping
-    public Booking createBooking(@RequestBody Booking booking){
-        return bookingService.create(booking);
+    public BookingEntity createBooking(@RequestBody BookingEntity bookingEntity){
+        return bookingService.create(bookingEntity);
     }
 
     @PutMapping("/{id}")
-    public Booking putBooking(@PathVariable String id, @RequestBody Booking booking){
-        return bookingService.updateBooking(id, booking);
+    public BookingEntity putBooking(@PathVariable String id, @RequestBody BookingEntity bookingEntity){
+        return bookingService.updateBooking(id, bookingEntity);
     }
 
     @DeleteMapping("/{id}")

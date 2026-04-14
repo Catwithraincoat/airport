@@ -1,4 +1,4 @@
-package com.example.airport.model;
+package com.example.airport.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name="bookings")
-public class Booking {
+public class BookingEntity {
     @Id
     @Column(name = "book_ref", length = 6)
     private String bookRef;
@@ -22,5 +22,5 @@ public class Booking {
     private BigDecimal totalAmount;
 // каскадное удаление может и не надо
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
-    private List<Ticket> tickets;
+    private List<TicketEntity> ticketEntities;
 }

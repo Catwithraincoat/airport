@@ -1,4 +1,4 @@
-package com.example.airport.model;
+package com.example.airport.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "aircrafts")
-public class Aircraft {
+public class AircraftEntity {
     // системные поля - дата создания  Creadet
     @Id
     @Column(name = "aircraft_code")
@@ -22,10 +22,10 @@ public class Aircraft {
 
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy ="aircraft")
-    private List<Flight> flights;
+    private List<FlightEntity> flightEntities;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy ="aircraft")
-    private List<Seat> seats;
+    private List<SeatEntity> seatEntities;
 
     //зфщита от  N +1
 }

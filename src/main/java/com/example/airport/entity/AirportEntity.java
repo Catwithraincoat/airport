@@ -1,4 +1,4 @@
-package com.example.airport.model;
+package com.example.airport.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 @Table(name = "airports")
 @Data
-public class Airport {
+public class AirportEntity {
 
     @Id
     @Column(name = "airport_code", length = 3)
@@ -30,10 +30,10 @@ public class Airport {
     private String timezone;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "departureAirport")
-    private List<Flight> departureFlights;
+    private List<FlightEntity> departureFlightEntities;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "arrivalAirport")
-    private List<Flight> arrivalFlights;
+    private List<FlightEntity> arrivalFlightEntities;
 
 
 

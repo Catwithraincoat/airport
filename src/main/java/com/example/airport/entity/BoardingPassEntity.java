@@ -1,36 +1,37 @@
-package com.example.airport.model;
+package com.example.airport.entity;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 @Entity
+@Table(name = "boarding_passes")
 @Data
-@Table(name="ticket_flights")
-public class TicketFlight {
+public class BoardingPassEntity {
     @EmbeddedId
-    private TicketFlightId id;
+    private BoardingPassId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("ticketNo")
     @JoinColumn(name = "ticket_no")
-    private Ticket ticket;
+    private TicketEntity ticketEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("flightId")
     @JoinColumn(name = "flight_id")
-    private Flight flight;
+    private FlightEntity flightEntity;
 
-    @Column(name = "fare_conditions", nullable = false, length = 10)
-    private String fareConditions;
+    @Column(name = "boarding_no", nullable = false)
+    private Integer boardingNo;
 
-    @Column(name = "amount", nullable = false)
-    private BigDecimal amount;
+    @Column(name = "seat_no", nullable = false, length = 4)
+    private String seatNo;
+
 
     @Embeddable
     @Data
-    public static class TicketFlightId
+    public static class BoardingPassId
             implements Serializable {
 
         @Column(name = "ticket_no")

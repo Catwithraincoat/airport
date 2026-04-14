@@ -1,40 +1,39 @@
 package com.example.airport.service;
 
-import com.example.airport.model.Aircraft;
+import com.example.airport.entity.AircraftEntity;
 import com.example.airport.repository.AircraftRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AircraftService {
-    private AircraftRepository aircraftRepository;
+    private final AircraftRepository aircraftRepository;
 
-    public AircraftService(AircraftRepository aircraftRepository){
-        this.aircraftRepository = aircraftRepository;
-    }
-
-    public Aircraft getAircraftById(String Id){
+    public AircraftEntity getAircraftById(String Id){
         return aircraftRepository.findById(Id).orElseThrow(() -> new RuntimeException("Самолёт не найден"));
 
     }
-    public List<Aircraft> getAll(){
+
+    public List<AircraftEntity> getAll(){
         return aircraftRepository.findAll();
     }
 
-    public Aircraft saveAircraft(Aircraft aircraft){
-        return aircraftRepository.save(aircraft);
+    public AircraftEntity saveAircraft(AircraftEntity aircraftEntity){
+        return aircraftRepository.save(aircraftEntity);
     }
 
     public void deleteAircraft(String Id){
         aircraftRepository.deleteById(Id);
     }
 
-    public Aircraft updateAircraft(String Id, Aircraft aircraft){
-        if (!aircraftRepository.existsById(aircraft.getAircraftCode())) {
+    public AircraftEntity updateAircraft(String Id, AircraftEntity aircraftEntity){
+        if (!aircraftRepository.existsById(aircraftEntity.getAircraftCode())) {
             throw new RuntimeException("Самолет не найден");
         }
-        return aircraftRepository.save(aircraft);
+        return aircraftRepository.save(aircraftEntity);
     }
 
 

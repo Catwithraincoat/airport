@@ -1,4 +1,4 @@
-package com.example.airport.model;
+package com.example.airport.entity;
 
 
 import jakarta.persistence.*;
@@ -16,14 +16,14 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder //для тестов
-public class Seat {
+public class SeatEntity {
     @EmbeddedId
     private SeatId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("aircraftCode")
     @JoinColumn(name = "aircraft_code")
-    private Aircraft aircraft;
+    private AircraftEntity aircraftEntity;
 
     @Column(name = "fare_conditions", nullable = false, length = 10)
     private String fareConditions;

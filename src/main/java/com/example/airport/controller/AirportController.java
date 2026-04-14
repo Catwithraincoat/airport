@@ -1,36 +1,35 @@
 package com.example.airport.controller;
 
-import com.example.airport.model.Airport;
+import com.example.airport.entity.AirportEntity;
 import com.example.airport.service.AirportService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/airports")
+@RequestMapping("/v1/airports")
+@RequiredArgsConstructor
 public class AirportController {
-    private AirportService airportService;
-
-    public AirportController(AirportService airportService) {
-        this.airportService = airportService;}
+    private final AirportService airportService;
 
     @GetMapping("/{code}")
-    public Airport getById(@PathVariable String code){
+    public AirportEntity getById(@PathVariable String code){
         return airportService.getById(code);
     }
 
     @GetMapping
-    public List<Airport> getAllAirports() {
+    public List<AirportEntity> getAllAirports() {
         return airportService.getAll();
     }
 
     @PostMapping
-    public Airport createAirport(@RequestBody Airport airport){
+    public AirportEntity createAirport(@RequestBody AirportEntity airport){
         return airportService.saveAirport(airport);
     }
 
     @PutMapping("/{code}")
-    public Airport updateAirport(@PathVariable String code, @RequestBody Airport airport){
+    public AirportEntity updateAirport(@PathVariable String code, @RequestBody AirportEntity airport){
         return airportService.updateAirport(code, airport);
     }
 

@@ -1,4 +1,4 @@
-package com.example.airport.model;
+package com.example.airport.entity;
 
 
 
@@ -10,14 +10,14 @@ import java.util.List;
 @Entity
 @Data
 @Table(name="tickets")
-public class Ticket{
+public class TicketEntity {
     @Id
     @Column(name = "ticket_no", length = 13)
     private String ticketNo;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "book_ref", nullable = false)
-    private Booking booking;
+    private BookingEntity bookingEntity;
 
     @Column(name = "passenger_id", nullable = false, length = 20)
     private String passengerId;
@@ -30,8 +30,8 @@ public class Ticket{
 
 
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
-    private List<TicketFlight> ticketFlights;
+    private List<TicketFlightEntity> ticketFlightEntities;
 
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
-    private List<BoardingPass> boardingPasses;
+    private List<BoardingPassEntity> boardingPassEntities;
 }

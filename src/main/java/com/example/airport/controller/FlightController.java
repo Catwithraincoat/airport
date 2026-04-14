@@ -1,39 +1,37 @@
 package com.example.airport.controller;
 
 
-import com.example.airport.model.Flight;
+import com.example.airport.entity.FlightEntity;
 import com.example.airport.service.FlightService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/flights")
+@RequestMapping("/v1/flights")
+@RequiredArgsConstructor
 public class FlightController {
     private final FlightService flightService;
 
-    public FlightController(FlightService flightService) {
-        this.flightService = flightService;
-    }
-
     @GetMapping
-    public List<Flight> getAll() {
+    public List<FlightEntity> getAll() {
         return flightService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Flight getById(@PathVariable Integer id) {
+    public FlightEntity getById(@PathVariable Integer id) {
         return flightService.getById(id);
     }
 
     @PostMapping
-    public Flight create(@RequestBody Flight flight) {
-        return flightService.create(flight);
+    public FlightEntity create(@RequestBody FlightEntity flightEntity) {
+        return flightService.create(flightEntity);
     }
 
     @PutMapping("/{id}")
-    public Flight updateFlight(@PathVariable Integer id, @RequestBody Flight flight){
-        return flightService.updateFlight(id, flight);
+    public FlightEntity updateFlight(@PathVariable Integer id, @RequestBody FlightEntity flightEntity){
+        return flightService.updateFlight(id, flightEntity);
     }
 
     @DeleteMapping("/{id}")

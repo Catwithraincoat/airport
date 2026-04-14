@@ -1,7 +1,7 @@
 package com.example.airport.service;
 
 
-import com.example.airport.model.Flight;
+import com.example.airport.entity.FlightEntity;
 import com.example.airport.repository.FlightRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,28 +13,28 @@ import java.util.List;
 public class FlightService {
     private final FlightRepository flightRepository;
 
-    public List<Flight> getAll() {
+    public List<FlightEntity> getAll() {
         return flightRepository.findAll();
     }
 
 
-    public Flight getById(Integer id) {
+    public FlightEntity getById(Integer id) {
         return flightRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Flight not found"));
     }
 
 
-    public Flight create(Flight flight) {
-        return flightRepository.save(flight);
+    public FlightEntity create(FlightEntity flightEntity) {
+        return flightRepository.save(flightEntity);
     }
 
     public void delete(Integer id) {
         flightRepository.deleteById(id);
     }
 
-    public Flight updateFlight(Integer Id, Flight flight){
+    public FlightEntity updateFlight(Integer Id, FlightEntity flightEntity){
         if (!flightRepository.existsById(Id)) {
-            return flightRepository.save(flight);
+            return flightRepository.save(flightEntity);
         }
         throw new RuntimeException("Полет не найден");
     }
