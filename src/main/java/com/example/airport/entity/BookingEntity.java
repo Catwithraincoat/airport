@@ -21,6 +21,6 @@ public class BookingEntity {
     @Column(name = "total_amount", nullable = false)
     private BigDecimal totalAmount;
 // каскадное удаление может и не надо
-    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bookingEntity", cascade = CascadeType.ALL)
     private List<TicketEntity> ticketEntities;
 }

@@ -43,10 +43,10 @@ public class FlightEntity {
     @Column(name = "actual_arrival")
     private OffsetDateTime actualArrival;
 
-    @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "flightEntity", cascade = CascadeType.ALL)
     private List<TicketFlightEntity> ticketFlightEntities;
 
-    @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "flightEntity", cascade = CascadeType.ALL)
     private List<BoardingPassEntity> boardingPassEntities;
 
 

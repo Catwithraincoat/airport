@@ -1,5 +1,6 @@
 package com.example.airport.controller;
 
+import com.example.airport.dto.AircraftDTO;
 import com.example.airport.entity.AircraftEntity;
 import com.example.airport.service.AircraftService;
 import lombok.RequiredArgsConstructor;
@@ -15,28 +16,30 @@ public class AircraftController {
     // Контроллер для поиска с фильтрами
 
     @GetMapping("/{code}")
-    public AircraftEntity getById(@PathVariable String code){
+    public AircraftDTO getById(@PathVariable String code){
         return aircraftService.getAircraftById(code);
     }
 
     @GetMapping
-    public List<AircraftEntity> getAllAircrafts() {
+    public List<AircraftDTO> getAllAircrafts() {
         return aircraftService.getAll();
     }
 
     @PostMapping
-    public AircraftEntity createAircraft(@RequestBody AircraftEntity aircraftEntity){
-        return aircraftService.saveAircraft(aircraftEntity);
+    public AircraftDTO createAircraft(@RequestBody AircraftDTO aircraftDTO){
+        return aircraftService.saveAircraft(aircraftDTO);
     }
 
+
     @PutMapping("/{code}")
-    public AircraftEntity updateAircraft(@PathVariable String code, @RequestBody AircraftEntity aircraftEntity){
-        return aircraftService.updateAircraft(code, aircraftEntity);
+    public AircraftDTO updateAircraft(@PathVariable String code, @RequestBody AircraftDTO aircraftDTO){
+        return aircraftService.updateAircraft(code, aircraftDTO);
     }
-    //Для удлание физическое и логическое - передача флага
+
     @DeleteMapping("/{code}")
-    public void deleteAircraft(@PathVariable String code){
-        aircraftService.deleteAircraft(code);
+    public String deleteAircraft(@PathVariable String code){
+
+        return aircraftService.deleteAircraft(code);
     }
 
 

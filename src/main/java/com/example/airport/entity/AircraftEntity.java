@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "aircrafts")
-@SQLDelete(sql = "update article set deleted=true where id=?")
+@SQLDelete(sql = "update aircrafts set is_deleted=true where aircraft_code=?")
 @SQLRestriction("is_deleted=false")
 @EntityListeners(AuditingEntityListener.class)
 public class AircraftEntity {
@@ -26,7 +26,7 @@ public class AircraftEntity {
     private boolean isDeleted = false;
 
     @CreatedDate
-    @Column(name ="created_at")
+    @Column(name ="created_at", updatable = false)
     private LocalDateTime createdAt;
 
 
@@ -43,10 +43,10 @@ public class AircraftEntity {
     private Integer range;
 
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy ="aircraft")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy ="aircraftEntity")
     private List<FlightEntity> flightEntities;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy ="aircraft")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy ="aircraftEntity")
     private List<SeatEntity> seatEntities;
 
     //зфщита от  N +1

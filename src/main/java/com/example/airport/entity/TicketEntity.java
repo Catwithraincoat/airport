@@ -29,9 +29,9 @@ public class TicketEntity {
     private String contactData;
 
 
-    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ticketEntity", cascade = CascadeType.ALL)
     private List<TicketFlightEntity> ticketFlightEntities;
 
-    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ticketEntity", cascade = CascadeType.ALL)
     private List<BoardingPassEntity> boardingPassEntities;
 }

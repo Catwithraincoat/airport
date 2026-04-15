@@ -1,39 +1,48 @@
 package com.example.airport.service;
 
+import com.example.airport.dto.AircraftDTO;
 import com.example.airport.entity.AircraftEntity;
+import com.example.airport.mapper.AircraftMapper;
 import com.example.airport.repository.AircraftRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class AircraftService {
     private final AircraftRepository aircraftRepository;
+    private final AircraftMapper aircraftMapper;
 
-    public AircraftEntity getAircraftById(String Id){
-        return aircraftRepository.findById(Id).orElseThrow(() -> new RuntimeException("Самолёт не найден"));
+    public AircraftDTO getAircraftById(String Id){
+        return aircraftMapper.toDTO(aircraftRepository.findById(Id).orElseThrow(() -> new RuntimeException("Самолёт не найден")));
 
     }
 
-    public List<AircraftEntity> getAll(){
-        return aircraftRepository.findAll();
+    public List<AircraftDTO> getAll(){
+        return aircraftRepository.findAll().stream()
+                .map(aircraftMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
-    public AircraftEntity saveAircraft(AircraftEntity aircraftEntity){
-        return aircraftRepository.save(aircraftEntity);
+    public AircraftDTO saveAircraft(AircraftDTO aircraftDTO){
+        return aircraftMapper.toDTO(aircraftRepository.save(aircraftMapper.toEntity(aircraftDTO)));
     }
 
-    public void deleteAircraft(String Id){
+    public String deleteAircraft(String Id){
         aircraftRepository.deleteById(Id);
+        return "Ok";
     }
 
-    public AircraftEntity updateAircraft(String Id, AircraftEntity aircraftEntity){
-        if (!aircraftRepository.existsById(aircraftEntity.getAircraftCode())) {
-            throw new RuntimeException("Самолет не найден");
-        }
-        return aircraftRepository.save(aircraftEntity);
+    public AircraftDTO updateAircraft(String code, AircraftDTO dto){
+        AircraftEntity existing = aircraftRepository.findById(code)
+                .orElseThrow(() -> new RuntimeException("Not found"));
+
+        existing.setModel(dto.getModel());
+        existing.setRange(Integer.valueOf(dto.getRange()));
+        return aircraftMapper.toDTO(aircraftRepository.save(existing));
     }
 
 
