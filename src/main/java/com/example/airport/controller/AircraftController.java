@@ -1,6 +1,7 @@
 package com.example.airport.controller;
 
 import com.example.airport.dto.AircraftDTO;
+import com.example.airport.dto.AircraftFilterDTO;
 import com.example.airport.entity.AircraftEntity;
 import com.example.airport.service.AircraftService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,10 @@ import java.util.List;
 public class AircraftController {
     private final AircraftService aircraftService;
     // Контроллер для поиска с фильтрами
+    @GetMapping("/search")
+    public List<AircraftDTO> search(AircraftFilterDTO aircraftFilterDTO){
+        return aircraftService.search(aircraftFilterDTO);
+    }
 
     @GetMapping("/{code}")
     public AircraftDTO getById(@PathVariable String code){

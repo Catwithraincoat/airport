@@ -1,6 +1,7 @@
 package com.example.airport.mapper;
 
 import com.example.airport.dto.AircraftDTO;
+import com.example.airport.dto.AircraftFilterDTO;
 import com.example.airport.entity.AircraftEntity;
 import org.springframework.stereotype.Component;
 
@@ -21,5 +22,13 @@ public class AircraftMapper {
         aircraft.setRange(Integer.valueOf(aircraftDTO.getRange()));
         return aircraft;
     }
+
+//    public AircraftEntity toEntity(AircraftFilterDTO aircraftDTO){
+//        AircraftEntity aircraft = new AircraftEntity();
+//        aircraft.setAircraftCode(aircraftDTO.getAircraftCode());
+//        aircraft.setModel(aircraftDTO.getModel());
+//        aircraft.setRange(Integer.valueOf(aircraftDTO.getRange()));
+//        return aircraft;
+//    }
 
 }

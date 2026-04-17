@@ -1,6 +1,7 @@
 package com.example.airport.service;
 
 import com.example.airport.dto.AircraftDTO;
+import com.example.airport.dto.AircraftFilterDTO;
 import com.example.airport.entity.AircraftEntity;
 import com.example.airport.mapper.AircraftMapper;
 import com.example.airport.repository.AircraftRepository;
@@ -43,6 +44,14 @@ public class AircraftService {
         existing.setModel(dto.getModel());
         existing.setRange(Integer.valueOf(dto.getRange()));
         return aircraftMapper.toDTO(aircraftRepository.save(existing));
+    }
+
+    public List<AircraftDTO> search(AircraftFilterDTO aircraftFilterDTO){
+        return aircraftRepository.search(
+                                        aircraftFilterDTO.getModel(),
+                                        Integer.valueOf(aircraftFilterDTO.getAircraftCode()),
+                                        Integer.valueOf(aircraftFilterDTO.getMaxRange()),
+                                        aircraftFilterDTO.getMinRange());
     }
 
 
