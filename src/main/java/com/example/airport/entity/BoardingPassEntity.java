@@ -2,8 +2,11 @@ package com.example.airport.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "boarding_passes")
@@ -11,6 +14,18 @@ import java.io.Serializable;
 public class BoardingPassEntity {
     @EmbeddedId
     private BoardingPassId id;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted = false;
+
+    @CreatedDate
+    @Column(name ="created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+
+    @LastModifiedDate
+    @Column(name="updated_at")
+    private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("ticketNo")

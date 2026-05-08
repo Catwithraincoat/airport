@@ -1,9 +1,12 @@
 package com.example.airport.entity;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -11,6 +14,18 @@ import java.math.BigDecimal;
 public class TicketFlightEntity {
     @EmbeddedId
     private TicketFlightId id;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted = false;
+
+    @CreatedDate
+    @Column(name ="created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+
+    @LastModifiedDate
+    @Column(name="updated_at")
+    private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("ticketNo")

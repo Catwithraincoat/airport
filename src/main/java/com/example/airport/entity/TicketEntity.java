@@ -4,7 +4,10 @@ package com.example.airport.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -14,6 +17,18 @@ public class TicketEntity {
     @Id
     @Column(name = "ticket_no", length = 13)
     private String ticketNo;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted = false;
+
+    @CreatedDate
+    @Column(name ="created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+
+    @LastModifiedDate
+    @Column(name="updated_at")
+    private LocalDateTime updatedAt;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "book_ref", nullable = false)

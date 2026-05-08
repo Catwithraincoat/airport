@@ -2,9 +2,11 @@ package com.example.airport.controller;
 
 import com.example.airport.dto.AircraftDTO;
 import com.example.airport.dto.AircraftFilterDTO;
-import com.example.airport.entity.AircraftEntity;
 import com.example.airport.service.AircraftService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,10 +16,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AircraftController {
     private final AircraftService aircraftService;
-    // Контроллер для поиска с фильтрами
+
+
     @GetMapping("/search")
-    public List<AircraftDTO> search(AircraftFilterDTO aircraftFilterDTO){
-        return aircraftService.search(aircraftFilterDTO);
+    public Page<AircraftDTO> search(
+            AircraftFilterDTO filter,
+            @PageableDefault(size = 10, page = 0) Pageable pageable
+    ) {
+        return aircraftService.search(filter, pageable);
     }
 
     @GetMapping("/{code}")

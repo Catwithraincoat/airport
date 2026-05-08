@@ -2,7 +2,10 @@ package com.example.airport.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -14,6 +17,18 @@ public class FlightEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "flight_id")
     private Integer flightId;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted = false;
+
+    @CreatedDate
+    @Column(name ="created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+
+    @LastModifiedDate
+    @Column(name="updated_at")
+    private LocalDateTime updatedAt;
 
     @Column(name = "flight_no", nullable = false, length = 6)
     private String flightNo;
